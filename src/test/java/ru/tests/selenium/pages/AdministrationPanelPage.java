@@ -53,4 +53,10 @@ public class AdministrationPanelPage extends PageBase {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(@class, 'post-publish-panel__postpublish')]" +
                 "//a[contains(., '" + title + "')]")));
     }
+
+    public void clickButtonLogout() {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(userNameButton).build().perform();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@id='wp-admin-bar-logout']"))).click();
+    }
 }

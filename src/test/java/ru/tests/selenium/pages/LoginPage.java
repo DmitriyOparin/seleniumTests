@@ -31,4 +31,6 @@ public class LoginPage extends PageBase {
         userPassInput.sendKeys(userPass);
         return this;
     }
+
+
 }

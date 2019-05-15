@@ -2,6 +2,9 @@ package ru.tests.selenium.app;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.opera.OperaDriver;
 import org.testng.Assert;
 import ru.tests.selenium.pages.AdministrationPanelPage;
 import ru.tests.selenium.pages.LoginPage;
@@ -16,9 +19,22 @@ public class Application {
     private LoginPage loginPage;
     private AdministrationPanelPage administrationPanelPage;
 
-    public Application() {
-        System.setProperty("webdriver.chrome.driver", "src/tools/chromedriver.exe");
-        driver = new ChromeDriver();
+
+    public Application(String browser) {
+        if (browser.equals("chrome")) {
+            System.setProperty("webdriver.chrome.driver", "src/tools/chromedriver.exe");
+            driver = new ChromeDriver();
+        } else if (browser.equals("firefox")) {
+            System.setProperty("webdriver.gecko.driver", "src/tools/geckodriver.exe");
+            driver = new FirefoxDriver();
+        } else if (browser.equals("opera")) {
+            System.setProperty("webdriver.opera.driver", "src/tools/operadriver.exe");
+            driver = new OperaDriver();
+        } else if (browser.equals("ie")) {
+            System.setProperty("webdriver.ie.driver", "src/tools/IEDriverServer.exe");
+            driver = new InternetExplorerDriver();
+        }
+
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
@@ -28,7 +44,9 @@ public class Application {
     }
 
     public void quit() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
 
@@ -37,6 +55,11 @@ public class Application {
                 .inputLoginAndPassword(userName, userPass)
                 .submitButton.click();
     }
+
+    public void logout() {
+        administrationPanelPage.clickButtonLogout();
+    }
+
 
     public void controlLogin(String userName) {
         String getName = administrationPanelPage.userNameButton.getText();
@@ -57,7 +80,7 @@ public class Application {
         Assert.assertEquals(text, getText);
     }
 
-    public void gotoMainPage(){
+    public void gotoMainPage() {
         mainPage.gotoMainPage();
     }
 }
