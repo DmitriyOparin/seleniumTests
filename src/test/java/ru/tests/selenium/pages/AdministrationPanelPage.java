@@ -20,6 +20,11 @@ public class AdministrationPanelPage extends PageBase {
     @FindBy(xpath = "//li[@id='wp-admin-bar-my-account']//span")
     public WebElement userNameButton;
 
+    public AdministrationPanelPage open() {
+        driver.get("http://wordpresstest.ru/wp-admin/post-new.php");
+        return this;
+    }
+
     public void clickButtonAddNewPost() {
         Actions actions = new Actions(driver);
         actions.moveToElement(addNewContentButton).build().perform();

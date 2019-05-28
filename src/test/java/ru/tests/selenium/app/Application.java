@@ -1,5 +1,8 @@
 package ru.tests.selenium.app;
 
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -10,6 +13,7 @@ import ru.tests.selenium.pages.AdministrationPanelPage;
 import ru.tests.selenium.pages.LoginPage;
 import ru.tests.selenium.pages.MainPage;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class Application {
@@ -67,12 +71,12 @@ public class Application {
     }
 
     public void addNewPost(String title, String text) {
-        administrationPanelPage.clickButtonAddNewPost();
-        administrationPanelPage.inputTitleAndTextPost(title, text);
+//        administrationPanelPage.clickButtonAddNewPost();
+        administrationPanelPage.open()
+                .inputTitleAndTextPost(title, text);
     }
 
     public void controlAddNewPost(String title, String text) {
-
         String getTitle = mainPage.getTitleLastPost();
         Assert.assertEquals(title, getTitle);
 
@@ -83,4 +87,10 @@ public class Application {
     public void gotoMainPage() {
         mainPage.gotoMainPage();
     }
+
+    public void screenshot(String nameTest) {
+        File screen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        new Screenshot(screen, nameTest);
+    }
+
 }

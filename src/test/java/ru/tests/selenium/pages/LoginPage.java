@@ -11,26 +11,23 @@ public class LoginPage extends PageBase {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(id="user_login")
+    @FindBy(id = "user_login")
     public WebElement userLoginInput;
 
-    @FindBy(id="user_pass")
+    @FindBy(id = "user_pass")
     public WebElement userPassInput;
 
-    @FindBy(id="wp-submit")
+    @FindBy(id = "wp-submit")
     public WebElement submitButton;
 
-
     public LoginPage open() {
-        driver.get("http://wordpresstest.ru/wp-login.php/");
+        driver.get("http://admin:admin@wordpresstest.ru/wp-login.php/");
         return this;
     }
 
-    public LoginPage inputLoginAndPassword(String userName, String userPass){
+    public LoginPage inputLoginAndPassword(String userName, String userPass) {
         userLoginInput.sendKeys(userName);
         userPassInput.sendKeys(userPass);
         return this;
     }
-
-
 }
