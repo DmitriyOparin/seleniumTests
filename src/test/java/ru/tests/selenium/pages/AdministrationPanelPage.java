@@ -1,6 +1,7 @@
 package ru.tests.selenium.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -20,7 +21,7 @@ public class AdministrationPanelPage extends PageBase {
     @FindBy(xpath = "//li[@id='wp-admin-bar-my-account']//span")
     public WebElement userNameButton;
 
-    public AdministrationPanelPage open() {
+    public AdministrationPanelPage openPageNewPost() {
         driver.get("http://wordpresstest.ru/wp-admin/post-new.php");
         return this;
     }
@@ -42,6 +43,19 @@ public class AdministrationPanelPage extends PageBase {
 
         driver.findElement(By.xpath("//p[contains(@class, 'wp-block-paragraph')]"))
                 .sendKeys(text);
+
+        clickPublishPost(title);
+    }
+    public void inputTitleAndTextPostJsExecutor(String title, String text) {
+        WebElement titleElem = driver.findElement(By.xpath("//textarea[@id='post-title-0']"));
+        WebElement textAreaElem = driver.findElement(By.xpath("//textarea[contains(@class,'editor-default-block-appender')]"));
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+//        String script = "document.evaluate(\"//textarea[contains(@class,'editor-default-block-appender')]\", document, null, XPathResult.ANY_TYPE, null).value='testText'";
+        String str1 = "arguments[0].value='" + title + "'";
+        String str2 = "arguments[0].value='" + text + "'";
+        js.executeScript("arguments[0].value='title'",titleElem);
+        js.executeScript("arguments[0].value='text'",textAreaElem);
+//        js.executeScript(str2,textAreaElem);
 
         clickPublishPost(title);
     }

@@ -18,6 +18,13 @@ public class MainTests extends TestBase {
         app.addNewPost(namePost, textPost);
         app.gotoMainPage();
         app.controlAddNewPost(namePost, textPost);
+    }
+
+    @Test(dependsOnMethods = "addNewPostTest", dataProviderClass = DataProviderGenerationNewPost.class, dataProvider = "generationNewPost")
+    public void addNewPostTestJsExecutor(String login, String password, String namePost, String textPost){
+        app.addNewPostJsExecutor(namePost, textPost);
+        app.gotoMainPage();
+        app.controlAddNewPost(namePost, textPost);
         app.logout();
     }
 }

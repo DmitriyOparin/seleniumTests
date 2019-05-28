@@ -21,6 +21,7 @@ public class TestBase {
         if (result.getStatus() == ITestResult.FAILURE) {
             String name = result.getName();
             app.screenshot(name);
+            app.logout();
         }
     }
 

@@ -1,6 +1,5 @@
 package ru.tests.selenium.app;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -72,7 +71,7 @@ public class Application {
 
     public void addNewPost(String title, String text) {
 //        administrationPanelPage.clickButtonAddNewPost();
-        administrationPanelPage.open()
+        administrationPanelPage.openPageNewPost()
                 .inputTitleAndTextPost(title, text);
     }
 
@@ -93,4 +92,8 @@ public class Application {
         new Screenshot(screen, nameTest);
     }
 
+    public void addNewPostJsExecutor(String title, String text) {
+        administrationPanelPage.openPageNewPost()
+                .inputTitleAndTextPostJsExecutor(title, text);
+    }
 }
