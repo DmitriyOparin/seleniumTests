@@ -50,12 +50,10 @@ public class AdministrationPanelPage extends PageBase {
         WebElement titleElem = driver.findElement(By.xpath("//textarea[@id='post-title-0']"));
         WebElement textAreaElem = driver.findElement(By.xpath("//textarea[contains(@class,'editor-default-block-appender')]"));
         JavascriptExecutor js = (JavascriptExecutor)driver;
-//        String script = "document.evaluate(\"//textarea[contains(@class,'editor-default-block-appender')]\", document, null, XPathResult.ANY_TYPE, null).value='testText'";
-        String str1 = "arguments[0].value='" + title + "'";
-        String str2 = "arguments[0].value='" + text + "'";
-        js.executeScript("arguments[0].value='title'",titleElem);
-        js.executeScript("arguments[0].value='text'",textAreaElem);
-//        js.executeScript(str2,textAreaElem);
+//        String script = "document.evaluate(\"//textarea[contains(@class,'editor-default-block-appender')]\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.value='test'";
+        js.executeScript("arguments[0].value='" + title + "'",titleElem);
+        js.executeScript("arguments[0].value='" + text + "'",textAreaElem);
+//        js.executeScript(script);
 
         clickPublishPost(title);
     }

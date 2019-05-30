@@ -25,6 +25,6 @@ public class MainTests extends TestBase {
         app.addNewPostJsExecutor(namePost, textPost);
         app.gotoMainPage();
         app.controlAddNewPost(namePost, textPost);
-        app.logout();
+//        app.logout();
     }
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 import ru.tests.selenium.pages.AdministrationPanelPage;
 import ru.tests.selenium.pages.LoginPage;
 import ru.tests.selenium.pages.MainPage;
@@ -22,6 +23,7 @@ public class Application {
     private LoginPage loginPage;
     private AdministrationPanelPage administrationPanelPage;
 
+    private SoftAssert softAssert;
 
     public Application(String browser) {
         if (browser.equals("chrome")) {
@@ -44,6 +46,7 @@ public class Application {
         mainPage = new MainPage(driver);
         loginPage = new LoginPage(driver);
         administrationPanelPage = new AdministrationPanelPage(driver);
+        softAssert = new SoftAssert();
     }
 
     public void quit() {
@@ -66,7 +69,9 @@ public class Application {
 
     public void controlLogin(String userName) {
         String getName = administrationPanelPage.userNameButton.getText();
-        Assert.assertEquals(userName, getName);
+//        Assert.assertEquals(userName, getName);
+        softAssert.assertEquals(userName, getName, "Not equal logins");
+        softAssert.assertAll();
     }
 
     public void addNewPost(String title, String text) {
@@ -77,10 +82,13 @@ public class Application {
 
     public void controlAddNewPost(String title, String text) {
         String getTitle = mainPage.getTitleLastPost();
-        Assert.assertEquals(title, getTitle);
+//        Assert.assertEquals(title, getTitle);
+        softAssert.assertEquals(title, getTitle, "Not equal title");
 
         String getText = mainPage.getTextLastPost();
-        Assert.assertEquals(text, getText);
+//        Assert.assertEquals(text, getText);
+        softAssert.assertEquals(text, getText, "Not equal text");
+        softAssert.assertAll();
     }
 
     public void gotoMainPage() {
