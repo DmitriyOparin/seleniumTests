@@ -56,7 +56,7 @@ public class Application {
         }
     }
 
-    @Step("ввод логина")
+    @Step("Вход на сайт логин: {userName}, пароль: {userPass}")
     public void login(String userName, String userPass) {
         loginPage.open()
                 .inputLoginAndPassword(userName, userPass)
@@ -67,7 +67,7 @@ public class Application {
         administrationPanelPage.clickButtonLogout();
     }
 
-    @Step("проверка логина")
+    @Step("Проверка входа юзера: {userName} на сайт")
     public void controlLogin(String userName) {
         String getName = administrationPanelPage.userNameButton.getText();
 //        Assert.assertEquals(userName, getName);
@@ -75,12 +75,14 @@ public class Application {
         softAssert.assertAll();
     }
 
+    @Step("Добавление новой статьи название: {title}, текст: {text}")
     public void addNewPost(String title, String text) {
 //        administrationPanelPage.clickButtonAddNewPost();
         administrationPanelPage.openPageNewPost()
                 .inputTitleAndTextPost(title, text);
     }
 
+    @Step("Проверка добавления статьи название: {title}, текст: {text}")
     public void controlAddNewPost(String title, String text) {
         String getTitle = mainPage.getTitleLastPost();
 //        Assert.assertEquals(title, getTitle);
@@ -92,6 +94,7 @@ public class Application {
         softAssert.assertAll();
     }
 
+    @Step("Переход на главную страницу")
     public void gotoMainPage() {
         mainPage.gotoMainPage();
     }
@@ -101,6 +104,7 @@ public class Application {
         new Screenshot(screen, nameTest);
     }
 
+    @Step("Добавление новой статьи название: {title}, текст: {text}")
     public void addNewPostJsExecutor(String title, String text) {
         administrationPanelPage.openPageNewPost()
                 .inputTitleAndTextPostJsExecutor(title, text);
