@@ -1,5 +1,6 @@
 package ru.tests.selenium.app;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -55,7 +56,7 @@ public class Application {
         }
     }
 
-
+    @Step("ввод логина")
     public void login(String userName, String userPass) {
         loginPage.open()
                 .inputLoginAndPassword(userName, userPass)
@@ -66,7 +67,7 @@ public class Application {
         administrationPanelPage.clickButtonLogout();
     }
 
-
+    @Step("проверка логина")
     public void controlLogin(String userName) {
         String getName = administrationPanelPage.userNameButton.getText();
 //        Assert.assertEquals(userName, getName);
