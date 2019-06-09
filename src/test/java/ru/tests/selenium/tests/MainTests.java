@@ -6,7 +6,6 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import ru.tests.selenium.dataProviders.DataProviderGenerationNewPost;
 
 public class MainTests extends TestBase {
 
@@ -19,23 +18,26 @@ public class MainTests extends TestBase {
         app.controlLogin(login);
     }
 
-    @Test(dependsOnMethods = "loginTest", dataProviderClass = DataProviderGenerationNewPost.class, dataProvider = "generationNewPost")
+    @Test(dependsOnMethods = "loginTest")
     @Description(value = "Тест проверяет добавление статьи")
     @Severity(value = SeverityLevel.CRITICAL)
-    public void addNewPostTest(String login, String password, String namePost, String textPost){
-        app.addNewPost(namePost, textPost);
+    public void addNewPostTest(){
+        String titlePost = app.generationTitlePost();
+        String textPost = app.generationTextPost();
+        app.addNewPost(titlePost, textPost);
         app.gotoMainPage();
-        app.controlAddNewPost(namePost, textPost);
+        app.controlAddNewPost(titlePost, textPost);
     }
 
-    @Test(dependsOnMethods = "addNewPostTest", dataProviderClass = DataProviderGenerationNewPost.class, dataProvider = "generationNewPost")
+    @Test(dependsOnMethods = "addNewPostTest")
     @Flaky
     @Description(value = "Тест проверяет добавление статьи через JS")
     @Severity(value = SeverityLevel.MINOR)
-    public void addNewPostTestJsExecutor(String login, String password, String namePost, String textPost){
-        app.addNewPostJsExecutor(namePost, textPost);
+    public void addNewPostTestJsExecutor(){
+        String titlePost = app.generationTitlePost();
+        String textPost = app.generationTextPost();
+        app.addNewPostJsExecutor(titlePost, textPost);
         app.gotoMainPage();
-        app.controlAddNewPost(namePost, textPost);
-//        app.logout();
+        app.controlAddNewPost(titlePost, textPost);
     }
 }

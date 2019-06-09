@@ -10,6 +10,11 @@ public class MainPage extends PageBase {
         PageFactory.initElements(driver, this);
     }
 
+    public MainPage open() {
+        driver.get("http://admin:admin@wordpresstest.ru/");
+        return this;
+    }
+
     public String getTitleLastPost() {
         String title = driver.findElement(By.xpath("//article[position()=1]//header//a"))
                 .getText();

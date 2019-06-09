@@ -1,19 +1,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="SuiteChrome" verbose="1">
+    <listeners>
+        <listener class-name="ru.tests.selenium.listeners.TestListeners" />
+    </listeners>
     <parameter name="browser" value="chrome"/>
-    <test name="loginAdmin">
+    <test name="admin">
         <parameter name="login" value="admin"/>
         <parameter name="password" value="admin"/>
-        <packages>
-            <package name="ru.tests.selenium.tests"/>
-        </packages>
-    </test>
-    <parameter name="browser" value="chrome"/>
-    <test name="loginEditor">
-        <parameter name="login" value="editor"/>
-        <parameter name="password" value="editor"/>
-        <packages>
-            <package name="ru.tests.selenium.tests"/>
-        </packages>
+        <parameter name="countLoop" value="3"/>
+        <classes>
+            <class name= "ru.tests.selenium.tests.MainTests"/>
+            <class name= "ru.tests.selenium.tests.MonkeyTests"/>
+        </classes>
     </test>
 </suite>

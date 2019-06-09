@@ -1,7 +1,10 @@
 package ru.tests.selenium.tests;
 
-import org.testng.ITestResult;
-import org.testng.annotations.*;
+import org.testng.ITestContext;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 import ru.tests.selenium.app.Application;
 
 public class TestBase {
@@ -9,17 +12,9 @@ public class TestBase {
 
     @BeforeSuite
     @Parameters({"browser"})
-    public void setUp(String browser) {
+    public void setUp(String browser, ITestContext context) {
         app = new Application(browser);
-    }
-
-    @AfterMethod
-    public void screenshotIfTestFail(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            String nameTest = result.getName();
-            app.screenshot(nameTest);
-//            app.logout();
-        }
+        context.setAttribute("app", app);
     }
 
     @AfterSuite
@@ -28,7 +23,7 @@ public class TestBase {
     }
 
     @AfterClass
-    public void logout(){
+    public void logout() {
         app.logout();
     }
 }

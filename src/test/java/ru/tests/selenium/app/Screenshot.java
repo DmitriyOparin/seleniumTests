@@ -6,10 +6,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class Screenshot {
-    private String separator = File.separator;
-    private String commonPath = "src" + separator + "screenshots" + separator;
 
-    public Screenshot(File screen, String nameTest) {
+    public static void saveScreenshot(File screen, String nameTest) {
+        String separator = File.separator;
+        String commonPath = "src" + separator + "screenshots" + separator;
+
         File nameScreen = new File(commonPath + nameTest + "_" + System.currentTimeMillis() + ".png");
         try {
             Files.copy(screen, nameScreen);
